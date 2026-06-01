@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-"""
-Auto Farm Movement Script for Minescript
-Automatically moves back and forth in a farm pattern with human-like randomization
-Supports multiple crop presets, custom configs, and diagonal spiral mode
-"""
-
 import minescript as ms
 import time
 import random
@@ -570,7 +563,6 @@ class FarmAutomation:
 
     # ------------------------------------------------------------------
     # Diagonal spiral mode
-    # Legs: (W+D) → (W+A) → (S) → (S+A) → repeat
     # Each leg runs until the player's XZ position stops changing for
     # less than stuck_time_threshold seconds.
     # ------------------------------------------------------------------
@@ -716,57 +708,6 @@ class FarmAutomation:
         ms.player_press_sprint(False)
         ms.player_press_attack(False)
         self.log("Cleanup complete.")
-
-
-# ===== COMMAND LINE INTERFACE =====
-
-def print_help():
-    help_text = """
-Auto Farm Movement Script
-Usage: \\farm_auto_move [options]
-
-Crop selection (interactive if omitted):
-  --crop <name>        : Set crop preset directly. Names:
-                         wheat, potato, carrot, sugarcane, pumpkin,
-                         melon, mushroom, netherwart, cocoa,
-                         wildrose, moonflower, sunflower
-  --custom             : Skip menu and enter custom settings manually
-  --list-crops         : List all available crop presets and exit
-
-Movement overrides (applied after crop preset):
-  --forward <blocks>   : Blocks to move forward (standard mode)
-  --yaw <angle>        : Target yaw angle 0-360
-  --pitch <angle>      : Target pitch angle -90 to 90
-  --look-time <sec>    : Time to rotate to target (default: 0.3)
-  --look-steps <n>     : Smoothness steps (default: 60)
-  --start-right        : Start moving right (default)
-  --start-left         : Start moving left
-  --no-sprint          : Disable sprinting
-  --no-break           : Disable auto-breaking
-  --diagonal           : Force enable diagonal spiral mode
-  --no-diagonal        : Force disable diagonal spiral mode
-  --max-iter <n>       : Max loop iterations (default: 1000)
-
-Coordinate trigger options:
-  --trigger-x <x>      : Set trigger X coordinate
-  --trigger-y <y>      : Set trigger Y coordinate
-  --trigger-z <z>      : Set trigger Z coordinate
-  --trigger-radius <r> : Distance to activate trigger (default: 20)
-  --trigger-cmd <cmd>  : Command to run at trigger
-  --no-trigger         : Disable coordinate trigger
-
-  --help               : Show this help
-
-Examples:
-  \\farm_auto_move
-  \\farm_auto_move --crop wheat
-  \\farm_auto_move --crop pumpkin --no-sprint
-  \\farm_auto_move --diagonal --yaw 90
-  \\farm_auto_move --custom
-"""
-    print(help_text)
-
-
 def list_crops():
     print("\nAvailable crop presets:")
     print("-" * 50)
